@@ -106,5 +106,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Pages\" />
+	</ItemGroup>
 	
 </Project>
