@@ -11,7 +11,7 @@ namespace CsStatsHub
         {
             InitializeComponent();
 
-            // 生成虚拟收藏好友数据
+            // Sample favorites data
             FavoritesList = new ObservableCollection<FavoritePlayer>
             {
                 new FavoritePlayer { PlayerInfo = "player 1: PlayerID", RankInfo = "Rank: Gold" },

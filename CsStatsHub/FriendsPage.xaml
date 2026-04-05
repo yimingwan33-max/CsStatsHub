@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CsStatsHub.FriendsPage"
+             Title="好友"
+             BackgroundColor="{StaticResource DarkBackground}">
+
+    <CollectionView x:Name="FriendsList"
+                    Margin="12,8"
+                    SelectionMode="Single"
+                    SelectionChanged="OnFriendSelected">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:FriendRow"
+                          xmlns:models="clr-namespace:CsStatsHub.Models">
+                <Border Stroke="#2f3542"
+                        StrokeThickness="1"
+                        BackgroundColor="#12151c"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="12"
+                        Margin="0,0,0,10">
+                    <Grid ColumnDefinitions="56,*,Auto" ColumnSpacing="12">
+                        <Border WidthRequest="56"
+                                HeightRequest="56"
+                                Stroke="#2f3542"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 28"
+                                BackgroundColor="#1b1f2a">
+                            <Image Aspect="AspectFill"
+                                   Source="{Binding AvatarImage}" />
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                            <Label Text="{Binding PersonaName}"
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource LightOnDarkBackground}"
+                                   LineBreakMode="TailTruncation" />
+                            <Label Text="{Binding StatusText}"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Gray400}" />
+                        </VerticalStackLayout>
+
+                        <Label Grid.Column="2"
+                               Text="›"
+                               FontSize="26"
+                               TextColor="{StaticResource Gray500}"
+                               VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

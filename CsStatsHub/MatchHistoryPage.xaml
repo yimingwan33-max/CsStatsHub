@@ -2,18 +2,71 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CsStatsHub.MatchHistoryPage"
-             Title="Match history">
+             Title="比赛记录"
+             BackgroundColor="{StaticResource DarkBackground}">
 
-    <CollectionView x:Name="MatchesCollection" Margin="20">
+    <CollectionView x:Name="MatchesList"
+                    Margin="16,12"
+                    SelectionMode="None"
+                    ItemSizingStrategy="MeasureFirstItem">
         <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Frame BorderColor="Gray" Margin="0,0,0,15" Padding="0">
-                    <VerticalStackLayout>
-                        <Label Text="{Binding MatchTitle}" FontAttributes="Bold" FontSize="16" Padding="10,10,10,5" />
-                        <BoxView HeightRequest="1" Color="Gray" />
-                        <Label Text="{Binding Details}" Padding="10,5,10,10" />
-                    </VerticalStackLayout>
-                </Frame>
+            <DataTemplate x:DataType="models:MatchHistoryRow"
+                          xmlns:models="clr-namespace:CsStatsHub.Models">
+                <Border Stroke="#2f3542"
+                        StrokeThickness="1"
+                        BackgroundColor="#12151c"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="12"
+                        Margin="0,0,0,12">
+                    <Grid ColumnDefinitions="104,Auto,*,Auto" ColumnSpacing="12" RowDefinitions="Auto,Auto">
+                        <Border Grid.RowSpan="2"
+                                WidthRequest="104"
+                                HeightRequest="64"
+                                Stroke="#2f3542"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 12"
+                                BackgroundColor="#1b1f2a">
+                            <Image Aspect="AspectFill"
+                                   Source="{Binding MapThumbUrl}" />
+                        </Border>
+
+                        <Border Grid.Column="1"
+                                Grid.RowSpan="2"
+                                Padding="10,6"
+                                VerticalOptions="Center"
+                                StrokeThickness="0"
+                                BackgroundColor="#1f2430"
+                                StrokeShape="RoundRectangle 10">
+                            <Label Text="{Binding ResultText}"
+                                   FontAttributes="Bold"
+                                   TextColor="{Binding ResultColor}"
+                                   VerticalOptions="Center" />
+                        </Border>
+
+                        <Label Grid.Column="2"
+                               Text="{Binding ScoreText}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="{StaticResource LightOnDarkBackground}"
+                               VerticalOptions="Center" />
+
+                        <Label Grid.Column="3"
+                               Grid.RowSpan="2"
+                               Text="{Binding KdaText}"
+                               FontSize="13"
+                               TextColor="#cbd6ea"
+                               VerticalOptions="Center"
+                               HorizontalTextAlignment="End" />
+
+                        <Label Grid.Column="2"
+                               Grid.Row="1"
+                               Text="{Binding MapName}"
+                               FontSize="12"
+                               TextColor="{StaticResource Gray400}"
+                               VerticalOptions="Start"
+                               LineBreakMode="TailTruncation" />
+                    </Grid>
+                </Border>
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

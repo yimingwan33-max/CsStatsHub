@@ -2,40 +2,170 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CsStatsHub.ProfilePage"
-             Title="Profile">
+             Title="资料"
+             BackgroundColor="{StaticResource DarkBackground}">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <Grid RowDefinitions="Auto,*">
+        <HorizontalStackLayout Grid.Row="0"
+                               Padding="12,8"
+                               Spacing="8"
+                               HorizontalOptions="End">
+            <Button Text="好友"
+                    Clicked="OnFriendsClicked"
+                    BackgroundColor="#1f2430"
+                    TextColor="{StaticResource LightOnDarkBackground}"
+                    BorderColor="#2f3542"
+                    BorderWidth="1"
+                    CornerRadius="10"
+                    Padding="14,8" />
+            <Button Text="比赛记录"
+                    Clicked="OnMatchHistoryClicked"
+                    BackgroundColor="#1f2430"
+                    TextColor="{StaticResource LightOnDarkBackground}"
+                    BorderColor="#2f3542"
+                    BorderWidth="1"
+                    CornerRadius="10"
+                    Padding="14,8" />
+        </HorizontalStackLayout>
 
-        <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
-            <BoxView Color="DarkSlateGray" WidthRequest="80" HeightRequest="80" CornerRadius="40" Grid.Column="0"/>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20" Spacing="18">
 
-            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="5">
-                <HorizontalStackLayout>
-                    <Label Text="Play name: " FontAttributes="Bold"/>
-                    <Label x:Name="NameLabel" />
-                </HorizontalStackLayout>
-                <HorizontalStackLayout>
-                    <Label Text="Rank: " FontAttributes="Bold"/>
-                    <Label x:Name="RankLabel" />
-                </HorizontalStackLayout>
+                <Border Stroke="#2f3542"
+                        StrokeThickness="1"
+                        BackgroundColor="#12151c"
+                        StrokeShape="RoundRectangle 18"
+                        Padding="18">
+                    <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="16">
+                        <Border Grid.RowSpan="3"
+                                WidthRequest="112"
+                                HeightRequest="112"
+                                Stroke="#2f3542"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 56"
+                                BackgroundColor="#1b1f2a">
+                            <Image x:Name="AvatarImage"
+                                   Aspect="AspectFill"
+                                   HeightRequest="112"
+                                   WidthRequest="112" />
+                        </Border>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                            <Label x:Name="PersonaNameLabel"
+                                   FontSize="22"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource LightOnDarkBackground}"
+                                   LineBreakMode="TailTruncation" />
+                            <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                                <Label x:Name="TierBadgeLabel"
+                                       FontSize="22"
+                                       VerticalOptions="Center" />
+                                <Label x:Name="TierNameLabel"
+                                       FontSize="16"
+                                       TextColor="#9fb4d6"
+                                       VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                            <Label x:Name="SteamIdLabel"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Gray400}" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12">
+                    <Border x:Name="KdCard"
+                            Stroke="#2f3542"
+                            StrokeThickness="1"
+                            BackgroundColor="#12151c"
+                            StrokeShape="RoundRectangle 14"
+                            Padding="14">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="K/D"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Gray400}" />
+                            <Label x:Name="KdValueLabel"
+                                   FontSize="26"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource LightOnDarkBackground}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            Stroke="#2f3542"
+                            StrokeThickness="1"
+                            BackgroundColor="#12151c"
+                            StrokeShape="RoundRectangle 14"
+                            Padding="14">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="爆头率"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Gray400}" />
+                            <Label x:Name="HsValueLabel"
+                                   FontSize="26"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource LightOnDarkBackground}" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="2"
+                            Stroke="#2f3542"
+                            StrokeThickness="1"
+                            BackgroundColor="#12151c"
+                            StrokeShape="RoundRectangle 14"
+                            Padding="14">
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="胜率"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Gray400}" />
+                            <Label x:Name="WinValueLabel"
+                                   FontSize="26"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource LightOnDarkBackground}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <Border Stroke="#2f3542"
+                        StrokeThickness="1"
+                        BackgroundColor="#12151c"
+                        StrokeShape="RoundRectangle 16"
+                        Padding="16">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="最近一场比赛"
+                               FontSize="14"
+                               TextColor="#9fb4d6"
+                               FontAttributes="Bold" />
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Border WidthRequest="96"
+                                    HeightRequest="56"
+                                    Stroke="#2f3542"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 10"
+                                    BackgroundColor="#1b1f2a">
+                                <Image x:Name="LastMapImage"
+                                       Aspect="AspectFill" />
+                            </Border>
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                <Label x:Name="LastMapLabel"
+                                       FontSize="16"
+                                       FontAttributes="Bold"
+                                       TextColor="{StaticResource LightOnDarkBackground}" />
+                                <Label x:Name="LastScoreLabel"
+                                       FontSize="14"
+                                       TextColor="#cbd6ea" />
+                                <Label x:Name="LastKdaLabel"
+                                       FontSize="13"
+                                       TextColor="{StaticResource Gray400}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label x:Name="SyncHintLabel"
+                       FontSize="11"
+                       TextColor="{StaticResource Gray500}"
+                       HorizontalTextAlignment="Center" />
             </VerticalStackLayout>
-        </Grid>
-
-        <ProgressBar x:Name="RankProgressBar" ProgressColor="LightBlue" Margin="0,10" />
-
-        <Frame BorderColor="LightGray" Padding="10">
-            <VerticalStackLayout Spacing="5">
-                <Label Text="Headshot rate :" />
-                <Label x:Name="KDLabel" />
-                <HorizontalStackLayout>
-                    <Label Text="Matches Played:" />
-                    <Label x:Name="MatchesLabel" />
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-        </Frame>
-
-        <Button Text="view match history" Clicked="OnViewMatchHistoryClicked" BackgroundColor="LightBlue" TextColor="Black" Margin="0,20,0,0"/>
-        <Button Text="Show favorites" Clicked="OnShowFavoritesClicked" BackgroundColor="LightBlue" TextColor="Black" />
-
-    </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>
